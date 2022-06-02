@@ -87,10 +87,36 @@ $("#task-form-modal .btn-primary").click(function () {
         .addClass("form-control")
         .val(text);
       $(this).replaceWith(textInput);
-      //textInput.trigger("focus");
+      textInput.trigger("focus");
     });
   }
 });
+
+// blur callback
+$(".list-grou").on("blur", "textarea", function () {
+  //get textarea's current value/text
+  var text = $(this)
+    .val()
+    .trim();
+  // get parent ul's id attribute
+  var status = $(this)
+    .closest(".list-group")
+    .attr("id")
+    .replace("list-", "");
+  // get task's position in the list of other li elements
+  var index = $(this)
+    .closest(".list-group-item")
+    .index();
+  // placeholders
+  tasks[status][index].text = text;
+  saveTasks();
+  // recreate p element
+  var taskP = $("<p>")
+    .addClass("m-1")
+    .text(text);
+  // replace textarea with p element
+  $(this).replaceWith(taskP);
+})
 
 // remove all tasks
 $("#remove-tasks").on("click", function () {
