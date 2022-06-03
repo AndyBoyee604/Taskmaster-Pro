@@ -93,7 +93,7 @@ $("#task-form-modal .btn-primary").click(function () {
 });
 
 // blur callback
-$(".list-grou").on("blur", "textarea", function () {
+$(".list-group").on("blur", "textarea", function () {
   //get textarea's current value/text
   var text = $(this)
     .val()
